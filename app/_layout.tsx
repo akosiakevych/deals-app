@@ -2,7 +2,11 @@ import { HeaderBackButton } from "@react-navigation/elements";
 import * as Linking from "expo-linking";
 import { Stack, router, useRouter } from "expo-router";
 import { useEffect } from "react";
+import { PersistGate } from "redux-persist/integration/react";
+import { Provider } from "react-redux";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+
+import { persistor, store } from "@/store";
 
 /**
  * Supports links such as `dealsapp://?dealId=42` or `dealsapp:///?dealId=42` by
@@ -46,34 +50,38 @@ function DealIdQueryDeepLink() {
 
 export default function RootLayout() {
   return (
-    <SafeAreaProvider>
-      <DealIdQueryDeepLink />
-      <Stack>
-        <Stack.Screen name="index" options={{ title: "Deals" }} />
-        <Stack.Screen
-          name="deal/[id]"
-          options={({ navigation }) => ({
-            title: "Deal Details",
-            headerBackTitle: "Deals",
-            headerLeft: (props) => (
-              <HeaderBackButton
-                {...props}
-                {...(!navigation.canGoBack() && {
-                  label: "Deals",
-                  displayMode: "default" as const,
-                })}
-                onPress={() => {
-                  if (navigation.canGoBack()) {
-                    navigation.goBack();
-                  } else {
-                    router.replace("/");
-                  }
-                }}
-              />
-            ),
-          })}
-        />
-      </Stack>
-    </SafeAreaProvider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <SafeAreaProvider>
+          <DealIdQueryDeepLink />
+          <Stack>
+            <Stack.Screen name="index" options={{ title: "Deals" }} />
+            <Stack.Screen
+              name="deal/[id]"
+              options={({ navigation }) => ({
+                title: "Deal Details",
+                headerBackTitle: "Deals",
+                headerLeft: (props) => (
+                  <HeaderBackButton
+                    {...props}
+                    {...(!navigation.canGoBack() && {
+                      label: "Deals",
+                      displayMode: "default" as const,
+                    })}
+                    onPress={() => {
+                      if (navigation.canGoBack()) {
+                        navigation.goBack();
+                      } else {
+                        router.replace("/");
+                      }
+                    }}
+                  />
+                ),
+              })}
+            />
+          </Stack>
+        </SafeAreaProvider>
+      </PersistGate>
+    </Provider>
   );
 }
