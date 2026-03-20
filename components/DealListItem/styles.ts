@@ -43,7 +43,6 @@ export const dealListItemStyles = StyleSheet.create({
     flexShrink: 0,
     alignSelf: "stretch",
     flexDirection: "column",
-    justifyContent: "center",
     alignItems: "flex-end",
   },
   title: {
