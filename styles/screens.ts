@@ -9,6 +9,12 @@ export const dealsStyles = StyleSheet.create({
     padding: spacing.screen,
     backgroundColor: colors.background,
   },
+  noDealsText: {
+    fontSize: typography.title,
+    fontWeight: "600",
+    color: colors.text,
+    textAlign: "center",
+  },
   list: {
     flex: 1,
     width: "100%",

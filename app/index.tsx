@@ -1,7 +1,14 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "expo-router";
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { FlatList, Pressable, View, type ViewToken } from "react-native";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { FlatList, Pressable, Text, View, type ViewToken } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { AnalyticsEventName, trackEvent } from "@/analytics";
@@ -9,6 +16,7 @@ import DealListItem from "@/components/DealListItem";
 import DealsSortFilterModal from "@/components/DealsSortFilterModal";
 import DealListSeparator from "@/components/ui/DealListSeparator";
 import { colors } from "@/constants/theme";
+import { FeatureFlagKey, useFeatureFlag } from "@/launchDarkly";
 import {
   setSortBy,
   toggleOnlyRefurbedHighestScore,
@@ -28,6 +36,7 @@ export default function Deals() {
     (s) => s.ui.onlyRefurbedHighestScore,
   );
   const [sortMenuOpen, setSortMenuOpen] = useState(false);
+  const showDealsSpotlight = useFeatureFlag(FeatureFlagKey.ShowDealsSpotlight);
   const deals = useDeals({
     sortBy,
     onlyRefurbedHighestScore,
@@ -99,6 +108,16 @@ export default function Deals() {
   const renderItem = ({ item }: { item: Deal }) => {
     return <DealListItem deal={item} />;
   };
+
+  if (!showDealsSpotlight) {
+    return (
+      <View style={dealsStyles.container}>
+        <Text style={dealsStyles.noDealsText}>
+          This feature is under construction
+        </Text>
+      </View>
+    );
+  }
 
   return (
     <SafeAreaView
