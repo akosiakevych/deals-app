@@ -1,15 +1,27 @@
-import { Text, View } from "react-native";
+import { FlatList, View } from "react-native";
+
+import { dealsStyles } from "@/styles/screens";
+import { useDeals } from "../api/hooks/deals/queryHooks";
+import DealListItem from "../components/DealListItem";
+import { Deal } from "../types";
 
 export default function Deals() {
+  const deals = useDeals();
+
+  const renderItem = ({ item }: { item: Deal }) => {
+    return <DealListItem deal={item} />;
+  };
+
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit the Deals screen in app/index.tsx.</Text>
+    <View style={dealsStyles.container}>
+      <FlatList
+        style={dealsStyles.list}
+        data={deals}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        windowSize={10}
+        initialNumToRender={10}
+      />
     </View>
   );
 }
