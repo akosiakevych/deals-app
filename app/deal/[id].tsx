@@ -1,5 +1,6 @@
 import { useLocalSearchParams } from "expo-router";
-import { Text, View } from "react-native";
+import { Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { dealDetailsStyles } from "@/styles/screens";
 
@@ -7,8 +8,8 @@ export default function DealDetails() {
   const { id } = useLocalSearchParams<{ id: string }>();
 
   return (
-    <View style={dealDetailsStyles.container}>
+    <SafeAreaView style={dealDetailsStyles.container} edges={["bottom", "left", "right"]}>
       <Text>Deal ID: {id}</Text>
-    </View>
+    </SafeAreaView>
   );
 }

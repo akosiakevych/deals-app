@@ -7,10 +7,12 @@ export const dealsStyles = StyleSheet.create({
     flex: 1,
     alignItems: "stretch",
     padding: spacing.screen,
+    backgroundColor: colors.background,
   },
   list: {
     flex: 1,
     width: "100%",
+    backgroundColor: colors.background,
   },
   linkButton: {
     paddingVertical: spacing.buttonVertical,
