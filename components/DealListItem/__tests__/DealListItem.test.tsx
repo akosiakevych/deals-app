@@ -1,9 +1,15 @@
-import { render, screen } from "@testing-library/react-native";
+import { fireEvent, render, screen } from "@testing-library/react-native";
 
+import { AnalyticsEventName, trackEvent } from "@/analytics";
 import { Deal } from "@/types";
 import { priceFormatter } from "@/utils";
 
 import DealListItem from "../index";
+
+jest.mock("@/analytics", () => ({
+  ...jest.requireActual<typeof import("@/analytics")>("@/analytics"),
+  trackEvent: jest.fn(),
+}));
 
 jest.mock("expo-router", () => ({
   Link: ({ children }: { children: React.ReactElement }) => children,
@@ -22,6 +28,19 @@ const baseDeal: Deal = {
 };
 
 describe("DealListItem", () => {
+  beforeEach(() => {
+    jest.mocked(trackEvent).mockClear();
+  });
+
+  it("tracks deal click when row is pressed", () => {
+    render(<DealListItem deal={baseDeal} />);
+    fireEvent.press(screen.getByRole("button"));
+    expect(trackEvent).toHaveBeenCalledTimes(1);
+    expect(trackEvent).toHaveBeenCalledWith(AnalyticsEventName.DealClicked, {
+      dealId: "item-1",
+    });
+  });
+
   it("renders title, price, discount, and refurbed score", () => {
     render(<DealListItem deal={baseDeal} />);
     expect(screen.getByText("List Item Title")).toBeTruthy();

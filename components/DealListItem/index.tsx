@@ -1,7 +1,9 @@
 import { Image } from "expo-image";
 import { Link } from "expo-router";
+import { useCallback } from "react";
 import { Pressable, Text, View } from "react-native";
 
+import { AnalyticsEventName, trackEvent } from "@/analytics";
 import BestSellerBadge from "@/components/ui/BestSellerBadge";
 import DiscountBadge from "@/components/ui/DiscountBadge";
 import RefurbedScoreBadge from "@/components/ui/RefurbedScoreBadge";
@@ -27,11 +29,16 @@ export default function DealListItem({ deal }: Props) {
 
   const accessibilityLabel = `${title}, ${priceFormatter.format(price)}, ${discountPercentage} percent off, refurbed score ${refurbedScore} out of 10${isBestSeller ? ", best seller" : ""}`;
 
+  const handlePress = useCallback(() => {
+    trackEvent(AnalyticsEventName.DealClicked, { dealId: id });
+  }, [id]);
+
   return (
     <Link href={{ pathname: "/deal/[id]", params: { id } }} asChild>
       <Pressable
         accessibilityRole="button"
         accessibilityLabel={accessibilityLabel}
+        onPress={handlePress}
         style={({ pressed }) => [
           styles.pressable,
           pressed && styles.pressablePressed,

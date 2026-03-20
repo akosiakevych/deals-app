@@ -1,9 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "expo-router";
-import { useCallback, useLayoutEffect, useState } from "react";
-import { FlatList, Pressable, View } from "react-native";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { FlatList, Pressable, View, type ViewToken } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { AnalyticsEventName, trackEvent } from "@/analytics";
 import DealListItem from "@/components/DealListItem";
 import DealsSortFilterModal from "@/components/DealsSortFilterModal";
 import DealListSeparator from "@/components/ui/DealListSeparator";
@@ -31,6 +32,33 @@ export default function Deals() {
     sortBy,
     onlyRefurbedHighestScore,
   });
+
+  const dealsImpressionKey = useMemo(
+    () => deals.map((d) => d.id).join("\0"),
+    [deals],
+  );
+  const viewedDealIds = useRef(new Set<string>());
+
+  useEffect(() => {
+    viewedDealIds.current = new Set();
+  }, [dealsImpressionKey]);
+
+  const onViewableItemsChanged = useCallback(
+    ({ viewableItems }: { viewableItems: ViewToken[] }) => {
+      for (const token of viewableItems) {
+        if (!token.isViewable || token.item == null) continue;
+        const deal = token.item as Deal;
+        if (viewedDealIds.current.has(deal.id)) continue;
+        viewedDealIds.current.add(deal.id);
+        trackEvent(AnalyticsEventName.DealViewed, { dealId: deal.id });
+      }
+    },
+    [],
+  );
+
+  const viewabilityConfig = useRef({
+    itemVisiblePercentThreshold: 60,
+  }).current;
 
   const openSortMenu = useCallback(() => {
     setSortMenuOpen(true);
@@ -85,6 +113,8 @@ export default function Deals() {
         ItemSeparatorComponent={DealListSeparator}
         windowSize={10}
         initialNumToRender={10}
+        onViewableItemsChanged={onViewableItemsChanged}
+        viewabilityConfig={viewabilityConfig}
       />
 
       <DealsSortFilterModal
