@@ -9,7 +9,8 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.dealsapp"
     },
     "android": {
       "adaptiveIcon": {
@@ -19,7 +20,46 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "dealsapp",
+              "host": "deal",
+              "pathPrefix": "/"
+            },
+            {
+              "scheme": "dealsapp",
+              "pathPrefix": "/deal"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        },
+        {
+          "action": "VIEW",
+          "data": [
+            {
+              "scheme": "dealsapp",
+              "host": "deal",
+              "pathPrefix": "/"
+            },
+            {
+              "scheme": "dealsapp",
+              "pathPrefix": "/deal"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ],
+      "package": "com.anonymous.dealsapp"
     },
     "web": {
       "output": "static",
