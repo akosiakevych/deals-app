@@ -25,7 +25,6 @@ const mockDeal: MockedDeal = {
   refurbedScore: 9,
   category: "Books",
   rating: 4.2,
-  isBestSeller: false,
   imageUrl: "https://example.com/deal.jpg",
 };
 
@@ -41,7 +40,7 @@ describe("DealDetailsComponent", () => {
     expect(toJSON()).toBeNull();
   });
 
-  it("renders header, description, price, and badges from the deal", () => {
+  it("renders header, description, price, and discount badge from the deal", () => {
     render(<DealDetailsComponent />);
     expect(screen.getByText("Mock Deal Title")).toBeTruthy();
     expect(
@@ -49,8 +48,9 @@ describe("DealDetailsComponent", () => {
     ).toBeTruthy();
     expect(screen.getAllByText(priceFormatter.format(199)).length).toBe(2);
     expect(screen.getByLabelText("12 percent discount")).toBeTruthy();
-    expect(screen.getByLabelText("Refurbed score 9 out of 10")).toBeTruthy();
-    expect(screen.queryByLabelText("Best seller")).toBeNull();
+    expect(
+      screen.queryByLabelText("Refurbed score 9 out of 10"),
+    ).toBeNull();
   });
 
   it("renders detail rows", () => {
@@ -61,14 +61,7 @@ describe("DealDetailsComponent", () => {
     expect(screen.getByText("deal-42")).toBeTruthy();
     expect(screen.getByText("4.2 / 5")).toBeTruthy();
     expect(screen.getByText("12%")).toBeTruthy();
+    expect(screen.getByText("Refurbed score")).toBeTruthy();
     expect(screen.getByText("9 / 10")).toBeTruthy();
-    expect(screen.getByText("No")).toBeTruthy();
-  });
-
-  it("shows best seller badge when deal is a best seller", () => {
-    jest.mocked(useDeal).mockReturnValue({ ...mockDeal, isBestSeller: true });
-    render(<DealDetailsComponent />);
-    expect(screen.getByLabelText("Best seller")).toBeTruthy();
-    expect(screen.getByText("Yes")).toBeTruthy();
   });
 });

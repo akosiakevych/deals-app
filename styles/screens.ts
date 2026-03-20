@@ -20,6 +20,9 @@ export const dealsStyles = StyleSheet.create({
     width: "100%",
     backgroundColor: colors.background,
   },
+  listItemSpacer: {
+    height: spacing.listItemGap,
+  },
   linkButton: {
     paddingVertical: spacing.buttonVertical,
     paddingHorizontal: spacing.buttonHorizontal,
@@ -97,7 +100,6 @@ export const dealDetailsStyles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "stretch",
-    padding: spacing.screen,
     backgroundColor: colors.background,
   },
 });

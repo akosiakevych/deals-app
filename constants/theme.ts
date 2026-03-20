@@ -11,8 +11,6 @@ export const colors = {
   discountBg: "#E8F5EC",
   refurbed: "#5B4B8A",
   refurbedBg: "#F0EDF7",
-  bestSeller: "#C45C00",
-  bestSellerBg: "#FFF4E5",
 } as const;
 
 export const spacing = {

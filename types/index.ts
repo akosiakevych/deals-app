@@ -6,6 +6,5 @@ export type Deal = {
   refurbedScore: number;
   category: string;
   rating: number;
-  isBestSeller: boolean;
   imageUrl: string;
 };

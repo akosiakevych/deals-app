@@ -8,12 +8,14 @@ export const dealDetailsComponentStyles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
-    paddingBottom: spacing.screen,
+    paddingBottom: spacing.cardPadding,
   },
   container: {
     flex: 1,
     alignItems: "stretch",
-    padding: spacing.screen,
+    paddingHorizontal: spacing.cardPadding,
+    paddingTop: spacing.sm,
+    paddingBottom: spacing.sm,
     backgroundColor: colors.background,
   },
   image: {
@@ -25,18 +27,13 @@ export const dealDetailsComponentStyles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "flex-start",
-    gap: spacing.md,
+    gap: spacing.sm,
   },
   headerContent: {
     flex: 1,
     minWidth: 0,
-    gap: spacing.sm,
-  },
-  sideBadges: {
-    flexShrink: 0,
-    alignItems: "flex-end",
-    justifyContent: "center",
-    gap: spacing.sm,
+    gap: spacing.xs,
+    alignItems: "flex-start",
   },
   title: {
     fontSize: typography.title,
@@ -55,21 +52,21 @@ export const dealDetailsComponentStyles = StyleSheet.create({
   priceContainer: {
     flexDirection: "row",
     alignItems: "center",
-    gap: spacing.sm,
+    gap: spacing.xs,
   },
   descriptionContainer: {
-    marginTop: spacing.md,
+    marginTop: spacing.sm,
     backgroundColor: colors.surface,
     borderRadius: radii.card,
-    padding: spacing.cardPadding,
+    padding: spacing.md,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.border,
   },
   detailRow: {
     flexDirection: "row",
     alignItems: "flex-start",
-    paddingVertical: spacing.sm,
-    gap: spacing.md,
+    paddingVertical: 6,
+    gap: spacing.sm,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.border,
   },

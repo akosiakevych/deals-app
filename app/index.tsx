@@ -14,7 +14,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { AnalyticsEventName, trackEvent } from "@/analytics";
 import DealListItem from "@/components/DealListItem";
 import DealsSortFilterModal from "@/components/DealsSortFilterModal";
-import DealListSeparator from "@/components/ui/DealListSeparator";
 import { colors } from "@/constants/theme";
 import { FeatureFlagKey, useFeatureFlag } from "@/launchDarkly";
 import {
@@ -27,6 +26,10 @@ import { dealsStyles } from "@/styles/screens";
 import { Deal } from "@/types";
 import { useDeals } from "../api/hooks/deals/queryHooks";
 import { DealSortMode } from "../utils/sortDeals";
+
+function DealListItemSpacer() {
+  return <View style={dealsStyles.listItemSpacer} />;
+}
 
 export default function Deals() {
   const navigation = useNavigation();
@@ -129,7 +132,7 @@ export default function Deals() {
         data={deals}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        ItemSeparatorComponent={DealListSeparator}
+        ItemSeparatorComponent={DealListItemSpacer}
         windowSize={10}
         initialNumToRender={10}
         onViewableItemsChanged={onViewableItemsChanged}

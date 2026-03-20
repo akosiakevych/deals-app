@@ -44,7 +44,6 @@ export const mockedDeals = Array.from({ length: 100 }, (_, i) => {
     refurbedScore: 1 + (i % 10),
     category: CATEGORIES[i % CATEGORIES.length],
     rating: Math.round((1 + ((n * 11) % 41) / 10) * 10) / 10,
-    isBestSeller: i % 2 === 0,
     imageUrl: `https://picsum.photos/seed/deal-${id}/200/200`,
   };
 });

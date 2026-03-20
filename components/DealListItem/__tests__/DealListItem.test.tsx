@@ -23,7 +23,6 @@ const baseDeal: Deal = {
   refurbedScore: 7,
   category: "Electronics",
   rating: 4,
-  isBestSeller: false,
   imageUrl: "https://example.com/item.jpg",
 };
 
@@ -49,22 +48,12 @@ describe("DealListItem", () => {
     expect(screen.getByLabelText("Refurbed score 7 out of 10")).toBeTruthy();
   });
 
-  it("sets row accessibility label without best seller when not a best seller", () => {
+  it("sets row accessibility label with title, price, discount, and score", () => {
     render(<DealListItem deal={baseDeal} />);
     expect(
       screen.getByLabelText(
         "List Item Title, $149, 18 percent off, refurbed score 7 out of 10",
       ),
     ).toBeTruthy();
-  });
-
-  it("includes best seller in accessibility label and renders badge when applicable", () => {
-    render(<DealListItem deal={{ ...baseDeal, isBestSeller: true }} />);
-    expect(
-      screen.getByLabelText(
-        "List Item Title, $149, 18 percent off, refurbed score 7 out of 10, best seller",
-      ),
-    ).toBeTruthy();
-    expect(screen.getByLabelText("Best seller")).toBeTruthy();
   });
 });

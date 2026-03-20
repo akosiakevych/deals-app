@@ -1,10 +1,10 @@
 import { fireEvent, render, screen } from "@testing-library/react-native";
 
+import DealsSortFilterModal from "..";
+
 jest.mock("@expo/vector-icons", () => ({
   Ionicons: () => null,
 }));
-
-import DealsSortFilterModal from "../../DealsSortFilterModal";
 
 describe("DealsSortFilterModal", () => {
   const defaultProps = {
@@ -44,12 +44,7 @@ describe("DealsSortFilterModal", () => {
   });
 
   it("marks filter checkbox checked when onlyRefurbedHighestScore is true", () => {
-    render(
-      <DealsSortFilterModal
-        {...defaultProps}
-        onlyRefurbedHighestScore
-      />,
-    );
+    render(<DealsSortFilterModal {...defaultProps} onlyRefurbedHighestScore />);
 
     expect(screen.getByRole("checkbox").props.accessibilityState).toEqual({
       checked: true,

@@ -4,7 +4,6 @@ import { useCallback } from "react";
 import { Pressable, Text, View } from "react-native";
 
 import { AnalyticsEventName, trackEvent } from "@/analytics";
-import BestSellerBadge from "@/components/ui/BestSellerBadge";
 import DiscountBadge from "@/components/ui/DiscountBadge";
 import RefurbedScoreBadge from "@/components/ui/RefurbedScoreBadge";
 import { Deal } from "@/types";
@@ -17,17 +16,10 @@ type Props = {
 };
 
 export default function DealListItem({ deal }: Props) {
-  const {
-    id,
-    title,
-    price,
-    discountPercentage,
-    refurbedScore,
-    imageUrl,
-    isBestSeller,
-  } = deal;
+  const { id, title, price, discountPercentage, refurbedScore, imageUrl } =
+    deal;
 
-  const accessibilityLabel = `${title}, ${priceFormatter.format(price)}, ${discountPercentage} percent off, refurbed score ${refurbedScore} out of 10${isBestSeller ? ", best seller" : ""}`;
+  const accessibilityLabel = `${title}, ${priceFormatter.format(price)}, ${discountPercentage} percent off, refurbed score ${refurbedScore} out of 10`;
 
   const handlePress = useCallback(() => {
     trackEvent(AnalyticsEventName.DealClicked, { dealId: id });
@@ -62,9 +54,6 @@ export default function DealListItem({ deal }: Props) {
               <DiscountBadge percentage={discountPercentage} />
             </View>
             <RefurbedScoreBadge score={refurbedScore} />
-          </View>
-          <View style={styles.badgeColumn}>
-            <BestSellerBadge visible={isBestSeller} />
           </View>
         </View>
       </Pressable>

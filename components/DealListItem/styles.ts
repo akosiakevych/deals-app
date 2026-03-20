@@ -39,12 +39,6 @@ export const dealListItemStyles = StyleSheet.create({
     alignItems: "flex-start",
     gap: spacing.sm,
   },
-  badgeColumn: {
-    flexShrink: 0,
-    alignSelf: "stretch",
-    flexDirection: "column",
-    alignItems: "flex-end",
-  },
   title: {
     width: "100%",
     fontSize: typography.title,

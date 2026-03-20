@@ -3,9 +3,7 @@ import { useLocalSearchParams } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
 
 import { useDeal } from "@/api/hooks/deals/queryHooks";
-import BestSellerBadge from "@/components/ui/BestSellerBadge";
 import DiscountBadge from "@/components/ui/DiscountBadge";
-import RefurbedScoreBadge from "@/components/ui/RefurbedScoreBadge";
 
 import { priceFormatter } from "../../utils";
 import { dealDetailsComponentStyles as styles } from "./styles";
@@ -62,10 +60,6 @@ export default function DealDetailsComponent() {
               <DiscountBadge percentage={deal.discountPercentage} />
             </View>
           </View>
-          <View style={styles.sideBadges}>
-            <BestSellerBadge visible={deal.isBestSeller} />
-            <RefurbedScoreBadge score={deal.refurbedScore} />
-          </View>
         </View>
         <View style={styles.descriptionContainer}>
           <DetailRow label="Category" value={deal.category} />
@@ -73,10 +67,9 @@ export default function DealDetailsComponent() {
           <DetailRow label="Rating" value={`${deal.rating} / 5`} />
           <DetailRow label="Price" value={priceFormatter.format(deal.price)} />
           <DetailRow label="Discount" value={`${deal.discountPercentage}%`} />
-          <DetailRow label="Refurbed score" value={`${deal.refurbedScore} / 10`} />
           <DetailRow
-            label="Best seller"
-            value={deal.isBestSeller ? "Yes" : "No"}
+            label="Refurbed score"
+            value={`${deal.refurbedScore} / 10`}
             isLast
           />
         </View>
