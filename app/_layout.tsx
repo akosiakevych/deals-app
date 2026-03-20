@@ -1,5 +1,6 @@
+import { HeaderBackButton } from "@react-navigation/elements";
 import * as Linking from "expo-linking";
-import { Stack, useRouter } from "expo-router";
+import { Stack, router, useRouter } from "expo-router";
 import { useEffect } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
@@ -49,7 +50,29 @@ export default function RootLayout() {
       <DealIdQueryDeepLink />
       <Stack>
         <Stack.Screen name="index" options={{ title: "Deals" }} />
-        <Stack.Screen name="deal/[id]" options={{ title: "Deal Details" }} />
+        <Stack.Screen
+          name="deal/[id]"
+          options={({ navigation }) => ({
+            title: "Deal Details",
+            headerBackTitle: "Deals",
+            headerLeft: (props) => (
+              <HeaderBackButton
+                {...props}
+                {...(!navigation.canGoBack() && {
+                  label: "Deals",
+                  displayMode: "default" as const,
+                })}
+                onPress={() => {
+                  if (navigation.canGoBack()) {
+                    navigation.goBack();
+                  } else {
+                    router.replace("/");
+                  }
+                }}
+              />
+            ),
+          })}
+        />
       </Stack>
     </SafeAreaProvider>
   );
