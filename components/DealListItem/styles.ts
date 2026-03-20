@@ -53,17 +53,6 @@ export const dealListItemStyles = StyleSheet.create({
     color: colors.text,
     lineHeight: 22,
   },
-  bestSellerBadge: {
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-    borderRadius: radii.sm,
-    backgroundColor: colors.bestSellerBg,
-  },
-  bestSellerText: {
-    fontSize: typography.caption - 1,
-    fontWeight: "600",
-    color: colors.bestSeller,
-  },
   metaRow: {
     flexDirection: "row",
     flexWrap: "wrap",
@@ -74,35 +63,5 @@ export const dealListItemStyles = StyleSheet.create({
     fontSize: typography.price,
     fontWeight: "700",
     color: colors.text,
-  },
-  discountBadge: {
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-    borderRadius: radii.sm,
-    backgroundColor: colors.discountBg,
-  },
-  discountText: {
-    fontSize: typography.caption,
-    fontWeight: "600",
-    color: colors.discount,
-  },
-  refurbedPill: {
-    alignSelf: "flex-start",
-    flexDirection: "row",
-    alignItems: "center",
-    gap: spacing.xs,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-    borderRadius: radii.sm,
-    backgroundColor: colors.refurbedBg,
-  },
-  refurbedLabel: {
-    fontSize: typography.caption,
-    fontWeight: "600",
-    color: colors.refurbed,
-  },
-  refurbedScore: {
-    fontSize: typography.caption,
-    color: colors.textSecondary,
   },
 });

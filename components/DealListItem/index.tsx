@@ -2,15 +2,13 @@ import { Image } from "expo-image";
 import { Link } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 
+import BestSellerBadge from "@/components/BestSellerBadge";
+import DiscountBadge from "@/components/DiscountBadge";
+import RefurbedScoreBadge from "@/components/RefurbedScoreBadge";
 import { Deal } from "@/types";
 
+import { priceFormatter } from "../../utils";
 import { dealListItemStyles as styles } from "./styles";
-
-const priceFormatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  maximumFractionDigits: 0,
-});
 
 type Props = {
   deal: Deal;
@@ -54,25 +52,12 @@ export default function DealListItem({ deal }: Props) {
             </Text>
             <View style={styles.metaRow}>
               <Text style={styles.price}>{priceFormatter.format(price)}</Text>
-              <View style={styles.discountBadge}>
-                <Text style={styles.discountText}>
-                  −{discountPercentage}%
-                </Text>
-              </View>
+              <DiscountBadge percentage={discountPercentage} />
             </View>
-            <View style={styles.refurbedPill}>
-              <Text style={styles.refurbedLabel}>Refurbed</Text>
-              <Text style={styles.refurbedScore}>
-                {refurbedScore}/10
-              </Text>
-            </View>
+            <RefurbedScoreBadge score={refurbedScore} />
           </View>
           <View style={styles.badgeColumn}>
-            {isBestSeller ? (
-              <View style={styles.bestSellerBadge}>
-                <Text style={styles.bestSellerText}>Best seller</Text>
-              </View>
-            ) : null}
+            <BestSellerBadge visible={isBestSeller} />
           </View>
         </View>
       </Pressable>

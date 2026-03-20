@@ -29,8 +29,8 @@ export const dealsStyles = StyleSheet.create({
 export const dealDetailsStyles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    alignItems: "stretch",
     padding: spacing.screen,
+    backgroundColor: colors.background,
   },
 });
