@@ -3,9 +3,9 @@ import { useLocalSearchParams } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
 
 import { useDeal } from "@/api/hooks/deals/queryHooks";
-import BestSellerBadge from "@/components/BestSellerBadge";
-import DiscountBadge from "@/components/DiscountBadge";
-import RefurbedScoreBadge from "@/components/RefurbedScoreBadge";
+import BestSellerBadge from "@/components/ui/BestSellerBadge";
+import DiscountBadge from "@/components/ui/DiscountBadge";
+import RefurbedScoreBadge from "@/components/ui/RefurbedScoreBadge";
 
 import { priceFormatter } from "../../utils";
 import { dealDetailsComponentStyles as styles } from "./styles";

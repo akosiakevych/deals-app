@@ -2,9 +2,9 @@ import { Image } from "expo-image";
 import { Link } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 
-import BestSellerBadge from "@/components/BestSellerBadge";
-import DiscountBadge from "@/components/DiscountBadge";
-import RefurbedScoreBadge from "@/components/RefurbedScoreBadge";
+import BestSellerBadge from "@/components/ui/BestSellerBadge";
+import DiscountBadge from "@/components/ui/DiscountBadge";
+import RefurbedScoreBadge from "@/components/ui/RefurbedScoreBadge";
 import { Deal } from "@/types";
 
 import { priceFormatter } from "../../utils";

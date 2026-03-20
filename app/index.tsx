@@ -2,7 +2,7 @@ import { FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import DealListItem from "@/components/DealListItem";
-import DealListSeparator from "@/components/DealListSeparator";
+import DealListSeparator from "@/components/ui/DealListSeparator";
 import { dealsStyles } from "@/styles/screens";
 import { useDeals } from "../api/hooks/deals/queryHooks";
 import { Deal } from "../types";
